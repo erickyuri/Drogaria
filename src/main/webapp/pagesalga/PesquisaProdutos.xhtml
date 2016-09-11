@@ -1,0 +1,83 @@
+<ui:composition template="/templates/LayoutPadra2.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Pesquisa de Produtos</ui:define>
+
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Persquisa de Produtos</h1>
+			<p:toolbar>
+				<p:toolbarGroup style="margin-top: 20px">
+					<p:commandButton value="Pesquisar" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/pagesalga/CadastroProdutos" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel for="sku" value="SKU" />
+				<p:inputText id="sku" size="20" maxlength="20" />
+
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" size="60" />
+			</p:panelGrid>
+
+
+			<p:dataTable id="produtostable"
+				value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
+				style="margin-top: 20px" emptyMessage="Menhum produto encontrado"
+				rows="20" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Skau" style="text-align:center; width=90">
+					<h:outputText value="123" />
+				</p:column>
+
+				<p:column headerText="Categoria" style="width: 250px">
+					<h:outputText value="Doces - Balas e chicletes" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="Bala de morango" />
+				</p:column>
+
+				<p:column headerText="Valor Unitario" width="120px"
+					style="text-align: right; ">
+					<h:outputText value="R$1,20" />
+				</p:column>
+
+				<p:column headerText="Estoque" width="100px"
+					style="text-align: center; ">
+					<h:outputText value="98" />
+
+				</p:column>
+
+				<p:column headerText="Opcoes" style=" width:100px; text-align: center">
+					<p:button icon="ui-icon-pencil" title="Editar" />
+					<p:commandButton icon="ui-icon-trash" 
+					title="Excluir" oncomplete="confirmaExclusao.show()" >
+					<p:confirm header="Confirmacao" message="Deseja excluir os dados?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Nao" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>

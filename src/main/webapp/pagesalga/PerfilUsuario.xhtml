@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</h:head>
+<h:body>
+	<h:form>
+
+		<p:tabView activeIndex="1" dynamic="true" cache="false">
+			<p:tab  title="Dados Pessoais">
+			<p:panelGrid columns="2">
+			<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" maxlength="50" size="30"
+					value="#{pessoaBean.pessoa.nome}" required="true"
+					requiredMessage="O campo 'Nome' é obrigatório" />
+
+
+				<p:outputLabel for="telefone" value="Telefone:" />
+				<p:inputMask id="telefone" mask="(99)9999-9999" size="15"
+					value="#{pessoaBean.pessoa.telefone}" required="true"
+					requiredMessage="O campo 'Telefone' é obrigatório" />
+
+
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" maxlength="100" size="50"
+					value="#{pessoaBean.pessoa.email}" required="true"
+					requiredMessage="O campo 'Email' é obrigatório" />
+			
+			</p:panelGrid>
+			</p:tab>
+			<p:tab title="Endereço">
+				
+				<p:panelGrid columns="2">
+				<p:outputLabel for="lagadouro" value="Logadouro:" />
+				<p:inputText id="lagadouro" maxlength="50" size="30"
+					 required="true"
+					requiredMessage="O campo 'logradouro é obrigatorio" />
+
+
+				<p:outputLabel for="numero" value="Telefone:" />
+				<p:inputMask id="numero" size="4" maxlength="4"
+					required="true"
+					requiredMessage="O campo 'Numero' é obrigatório" />
+
+
+				<p:outputLabel for="cidade" value="Cidade:" />
+				<p:inputText id="cidade" maxlength="15" size="20"
+					required="true"
+					requiredMessage="O campo 'Email' é obrigatório" />
+					</p:panelGrid>
+					
+					<h:outputText value="#{dataBean.dataAtual}">
+					<f:convertDateTime pattern="HH:mm:ss"/>
+					
+					</h:outputText>
+					
+					</p:tab>
+				
+				
+		</p:tabView>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Casos</title>
+
+	<!-- chama o script para traduzir o calendario -->
+	<h:outputScript library="js" name="scripts.js" />
+
+	<h:outputScript library="js" name="valor.js" />
+
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+	<h:form id="formListagem">
+		<p:panel header="Controle de Casos ">
+			<p:menubar>
+				<p:submenu label="Mail">
+					<p:menuitem value="Gmail" url="http://www.gmail.com" />
+
+					<p:menuitem value="Yahoo Mail" url="http://mail.yahoo.com" />
+				</p:submenu>
+				<p:submenu label="Videos">
+					<p:menuitem value="Youtube" url="http://www.youtube.com" />
+
+				</p:submenu>
+			</p:menubar>
+			<p:focus />
+
+
+
+			<p:dataTable id="tabela" emptyMessage="Nenhum Registro Encontrado"
+				paginator="true" value="#{casosBean.casos}" var="caso">
+
+
+				
+
+					<f:facet name="footer">
+
+						<p:commandButton value="Novo" onfocus="inclua"
+							oncomplete="PF('dlgMatriculas').show();" 
+							actionListener="#{casosBean.novo}" 
+							update=":formCadastro:painelCadastro">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+						
+						
+
+
+					</f:facet>
+				
+				<p:column headerText="Parte" filterBy="#{caso.parte}"
+					resizable="true">
+					<h:outputText value="#{caso.parte}" />
+				</p:column>
+
+
+				<p:column headerText="Codigo" filterBy="#{caso.codigo}">
+					<h:outputText value="#{caso.codigo}" />
+				</p:column>
+
+
+
+
+				<p:column headerText="Natureza">
+					<h:outputText value="#{caso.natureza}" />
+				</p:column>
+
+
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{casosBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+
+						<p:confirm header="Confirmação" message="Deseja excluir os dados?"
+							icon="ui-icon-alert" />
+						<f:attribute name="casoSelecionado" value="#{caso}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{casosBean.editar}"
+						oncomplete="PF('dlgCasos').show()"
+						update=":formCadastro2:painelCadastro2">
+						<f:attribute name="casoSelecionado" value="#{caso}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Novo Caso" widgetVar="dlgMatriculas"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form id="formCadastro">
+
+			<p:panelGrid id="painelCadastro" columns="2">
+
+
+				<p:outputLabel value="Codigo"/>
+				<h:outputText value="#{casosBean.maior}"/>
+
+				
+				<p:outputLabel value="Parte:" />
+				<p:inputText id="parte" maxlength="50" size="30" required="true"
+					requiredMessage=" " value="#{casosBean.caso.parte}"
+					onblur="liberar();" />
+
+				
+				
+
+				<p:outputLabel for="natureza" value="Natureza" />
+				<p:selectOneMenu id="natureza" filter="true"
+					value="#{casosBean.caso.natureza}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="false"
+						itemLabel="Selecione uma natureza" />
+					<f:selectItems value="#{casosBean.naturezas}" var="natureza"
+						itemValue="#{natureza.natureza}" itemLabel="#{natureza.natureza}" />
+				</p:selectOneMenu>
+
+
+
+
+
+				<p:outputLabel value="Data Entrada: " />
+				<p:calendar required="true" requiredMessage="informe a data"
+					value="#{casosBean.caso.data_ent}" locale="pt_BR" />
+
+
+				<p:outputLabel value="Apresentante: " />
+				<p:inputText maxlength="20" size="20"
+					value="#{casosBean.caso.nome_cont}" />
+
+
+				<p:outputLabel value="Telefone: " />
+				<p:inputText maxlength="11" size="11"
+					value="#{casosBean.caso.telefone}" />
+
+				<p:outputLabel value="Email: " />
+				<p:inputText maxlength="25" size="25"
+					value="#{casosBean.caso.email}" />
+
+
+			</p:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" actionListener="#{casosBean.salvar}"
+					update=":mensagem :formCadastro:painelCadastro :formListagem:tabela" />
+				<p:commandButton value="Fechar" update=":formListagem:tabela"
+					oncomplete="PF('dlgMatriculas').hide ();" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	<p:dialog header="Historico Simplificado" widgetVar="dlgCasos"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form id="formCadastro2">
+
+			<p:panelGrid id="painelCadastro2" columns="2">
+
+
+
+				<p:outputLabel value="Parte:" />
+				<p:inputText maxlength="50" size="30" required="true"
+					requiredMessage=" " value="#{casosBean.caso.parte}" />
+
+
+
+
+				<p:outputLabel value="Natureza" />
+				<p:inputText maxlength="25" size="25"
+					value="#{casosBean.caso.natureza}" />
+
+
+
+				<p:outputLabel value="Data Entrada:" />
+				<p:calendar required="true" requiredMessage="informe a data"
+					value="#{casosBean.caso.data_ent}" locale="pt_BR" size="9" />
+
+				<h:outputText for="status" value="Status:" />
+				<p:selectOneButton id="status" required="true"
+					requiredMessage="selecione um status"
+					value="#{casosBean.caso.status}">
+					<f:selectItem itemLabel="Pendencia" itemValue="pendencia" />
+					<f:selectItem itemLabel="Aprovado" itemValue="aprovado" />
+					<f:selectItem itemLabel="Assinado" itemValue="assinado" />
+
+				</p:selectOneButton>
+
+
+
+
+
+
+
+				<p:outputLabel for="data_ass" value="Data Assinatura:" />
+				<p:calendar id="data_ass" required="true"
+					requiredMessage="informe a data" value="#{casosBean.caso.data_ass}"
+					locale="pt_BR" size="9" />
+
+				<p:outputLabel for="custoUni" value="Escritura R$:" />
+				<p:inputText id="custoUni" label="Valor" widgetVar="addressTextarea"
+					value="#{casosBean.caso.valor}" maxlength="11" size="9"
+					required="true" requiredMessage="Informe o Preço unitário"
+					onkeypress="mascara(this, valor);" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					<p:outputLabel for="cobrado" value="Escritura2 R$:" />
+				<p:inputText id="cobrado" label="Valor" widgetVar="addressTextarea"
+					value="#{casosBean.caso.valor_cob}" maxlength="11" size="9"
+					required="true" requiredMessage="Informe o Preço unitário"
+					onkeypress="mascara(this, valor)" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					<p:outputLabel for="regi_cobrado" value="Escritura2 R$:" />
+				<p:inputText id="regi_cobrado" label="Valor" widgetVar="addressTextarea"
+					value="#{casosBean.caso.valor_regcob}" maxlength="11" size="9"
+					required="true" requiredMessage="Informe o Preço unitário"
+					onkeypress="mascara(this, valor);" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+
+				<p:outputLabel value="Registro R$: " />
+				<p:inputText label="Valor" value="#{casosBean.caso.valor_reg}"
+					maxlength="11" size="11" onkeypress="mascara(this, valor)" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+
+			</p:panelGrid>
+
+			<h:panelGrid columns="3">
+				<p:commandButton value="Salvar" onclick="alert('salvar');"
+					actionListener="#{casosBean.salvar}"
+					update=":mensagem :formCadastro2:painelCadastro2 :formListagem:tabela" />
+				<p:commandButton value="Fechar" update=":formListagem:tabela"
+					oncomplete="PF('dlgCasos').hide ();" />
+
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:dialog>
+
+</h:body>
+</html>

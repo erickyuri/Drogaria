@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Matriculas</title>
+</h:head>
+
+<h:body>
+	<p:growl id="mensagens" />
+	<h:form id="natureza">
+
+
+
+		<p:panel>
+			<f:facet name="footer">
+				<p:commandButton value="Nova Natureza"
+					oncomplete="PF('dlgNaturezas').show();"
+					actionListener="#{naturezaBean.novo}"
+					update=":formCadastro:painelCadastro">
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+				</p:commandButton>
+			</f:facet>
+		</p:panel>
+	</h:form>
+
+
+	<p:dialog header="Naturezas" widgetVar="dlgNaturezas" draggable="false"
+		resizable="false" modal="true" closable="false">
+		<h:form id="formCadastro">
+
+
+			<h:panelGrid id="painelCadastro" columns="3">
+
+
+						<script>
+					jQuery(document).ready(function(jQuery) {
+						// Chamada da funcao upperText(); ao carregar a pagina
+						upperText();
+					});
+					// Funcao que faz o texto ficar em uppercase
+					function upperText() {
+						// Para tratar o colar
+						jQuery(".up").bind('paste', function(e) {
+							var el = jQuery(this);
+							setTimeout(function() {
+								var text = jQuery(el).val();
+								el.val(text.toUpperCase());
+							}, 100);
+						});
+						// Para tratar quando é digitado
+						jQuery(".up").keypress(function() {
+							var el = jQuery(this);
+							setTimeout(function() {
+								var text = jQuery(el).val();
+								el.val(text.toUpperCase());
+							}, 100);
+						});
+					}
+				</script>
+
+
+				<p:outputLabel value="Natureza:" />
+				<p:inputText maxlength="35" size="35" required="true"
+					requiredMessage="inclua uma natureza"
+					value="#{naturezaBean.natureza.natureza}" styleClass="up" />
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{naturezaBean.salvar}"
+					update=":mensagens :formCadastro:painelCadastro" />
+				<p:commandButton value="Fechar" update=":natureza"
+					oncomplete="PF('dlgNaturezas').hide ();" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+
+</h:body>
+
+
+
+</html>

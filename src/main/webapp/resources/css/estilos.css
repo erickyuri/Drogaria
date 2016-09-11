@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+.imagemCentralizada {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.divTopo {
+	padding-bottom: 5px;
+}
+
+.divCabecalho {
+	padding-bottom: 5px;
+}
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 100% !important;
+}
+
+
+#loginDialog{
+	
+	width: 290px;
+	margin: auto;
+	margin-top: 150px;
+	
+}
+h1 {
+	font-size: 24px;
+	font-weight: 400;
+	padding: 0px;
+	margin-top: 0px;
+	
+	
+}
+.grid-login{
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	margin-top: 8px;
+	padding: 10px;
+	
+	
+	
+}
+
+

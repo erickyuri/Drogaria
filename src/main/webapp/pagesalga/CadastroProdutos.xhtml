@@ -1,0 +1,58 @@
+<ui:composition template="/templates/LayoutPadra2.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Novo Produto</ui:define>
+	<h:outputScript library="js" name="valor.js" />
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Novo Produto</h1>
+			<p:toolbar>
+				<p:toolbarGroup style="margin-top: 20px;">
+					<p:button value="Novo" outcome="/pagesalga/CadastroProdutos" />
+					<p:commandButton value="Salvar" id="botaoSalvar" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/pagesalga/PesquisaProdutos" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel for="sku" value="SKU" />
+				<p:inputText id="sku" size="20" maxlength="20" />
+
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" size="60" maxlength="80" />
+
+				<p:outputLabel for="categoria" value="Categoria" />
+				<p:selectOneMenu id="categoria">
+					<f:selectItem itemLabel="Selecione a categoria" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="subCategoria" value="Categoria" />
+				<p:selectOneMenu id="subCategoria">
+					<f:selectItem itemLabel="Selecione a subcategoria" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="valorUnitario" value="Valor Unitario" />
+				<p:inputText id="valorUnitario" size="8" maxlength="10"
+					onkeypress="mascara(this, valor);">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+
+				</p:inputText>
+
+				<p:outputLabel for="estoque" value="Estoque" />
+				<p:inputText id="estoque" size="8" maxlength="10" />
+			</p:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

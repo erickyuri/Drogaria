@@ -1,0 +1,54 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Numero" />
+		<h:outputText value="123456" />
+
+		<p:outputLabel value="Data da criacao" />
+		<h:outputText value="07/09/2016" />
+
+		<p:outputLabel value="Status" />
+		<h:outputText value="orcamento" />
+
+		<p:outputLabel value="Vendedor" for="vendedor" />
+		<p:selectOneMenu id="vendedor">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItem itemLabel="Joao das Couves Junior" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Cliente" for="cliente" />
+		<p:autoComplete id="cliente" size="40" dropdown="true" />
+
+		<p:outputLabel value="Forma de Pagamento" for="formapagamento" />
+		<p:selectOneMenu id="formapagamento">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItem itemLabel="Cartao de credito" />
+		</p:selectOneMenu>
+
+
+		<p:outputLabel value="Valor do frete" for="valorfrete" />
+		<p:inputText id="valorfrete" size="10" maxlength="10" />
+
+
+		<p:outputLabel value="Subtotal" style="dont-weigth:bold" />
+		<h:outputText value="R$0,00" style="front-weigth: bold" id="subtotal" />
+
+
+		<p:outputLabel value="Valor de desconto" for="valordesconto" />
+		<h:inputText id="valordesconto" size="10" maxlength="10" />
+
+		<p:outputLabel value="Total do pedido"
+			style="font-weight: bold; font-size: 1.1em" />
+		<h:outputText value="R$0,00"
+			style="font-weight: bold; font-seize: 1.1em" />
+
+
+	</p:panelGrid>
+</ui:composition>

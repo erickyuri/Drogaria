@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Matriculas</title>
+	
+	<!-- chama o script para traduzir o calendario -->
+	<h:outputScript library="js" name="scripts.js" />
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+	<h:form id="formListagem">
+		<p:panel header="Matriculas - Solicitadas">
+			<p:dataTable id="tabela" emptyMessage="Nenhum Registro Encontrado"
+				paginator="true" value="#{matriculaBean.matriculas}" var="matricula" >
+				<f:facet name="footer">
+					<p:commandButton value="Novo"
+						oncomplete="PF('dlgMatriculas').show();"
+						actionListener="#{matriculaBean.novo}"
+						update=":formCadastro:painelCadastro">
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						 </p:commandButton>
+				</f:facet>
+
+				<p:column headerText="Matricula" filterBy="#{matricula.matricula}">
+					<h:outputText value="#{matricula.matricula}" />
+				</p:column>
+				
+				<p:column headerText="Tipo">
+					<h:outputText value="#{matricula.tipo}"/>				
+				</p:column>
+
+				<p:column headerText="Registro">
+					<h:outputText value="#{matricula.registro}" />
+				</p:column>
+
+				<p:column headerText="Protocolo">
+					<h:outputText value="#{matricula.protocolo}" />
+				</p:column>
+
+				<p:column headerText="Data do Pedido" sortBy="#{matricula.data_ped}">
+					<h:outputText value="#{matricula.data_ped}" />
+
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{matriculaBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+
+						<p:confirm header="Confirmação" message="Deseja excluir os dados?"
+							icon="ui-icon-alert" />
+						<f:attribute name="matriculaSelecionada" value="#{matricula}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{matriculaBean.editar}"
+						oncomplete="PF('dlgMatriculas').show()"
+						update=":formCadastro:painelCadastro">
+						<f:attribute name="matriculaSelecionada" value="#{matricula}" />
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Pedidos" widgetVar="dlgMatriculas" draggable="false"
+		resizable="false" modal="true" closable="false">
+		<h:form id="formCadastro">
+
+			<h:panelGrid id="painelCadastro" columns="2">
+
+
+				<p:outputLabel for="caso"  value="Caso" />
+		<p:selectOneMenu id="caso" filter="true" value="#{matriculaBean.matricula.caso}"
+		converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="atribuir pedido a um caso">
+			<f:selectItem noSelectionOption="true" itemLabel="Selecione um caso"/>
+			<f:selectItems value="#{matriculaBean.casos}" var="caso"  
+			itemValue="#{caso}" itemLabel="#{caso.parte} #{caso.codigo}" />
+			</p:selectOneMenu>
+
+				<h:outputText for="tipo" value="Tipo:" />
+				<p:selectOneButton id="tipo" required="true" requiredMessage="informar um tipo" value="#{matriculaBean.matricula.tipo}">
+					<f:selectItem itemLabel="Matricula" itemValue="matricula" />
+					<f:selectItem itemLabel="Visualização" itemValue="Visualização" />
+					<p:spacer width="50"/>
+				</p:selectOneButton>
+
+
+				<p:outputLabel value="Matricula:" />
+				<p:inputText maxlength="7" size="9"
+					required="true" requiredMessage="informar o nº" value="#{matriculaBean.matricula.matricula}" />
+
+				<p:outputLabel value="Registro:" />
+				<p:inputTextarea rows="6" cols="33"
+					required="true" requiredMessage="informar o Registro" value="#{matriculaBean.matricula.registro}" />
+
+
+				<p:outputLabel value="Protocolo:" />
+				<p:inputText maxlength="10" size="12" required="true" requiredMessage="informar o Protocolo"
+					value="#{matriculaBean.matricula.protocolo}" />
+
+
+
+				<p:outputLabel value="Data Pedido:" />
+				<p:calendar required="true" requiredMessage="informe a data" value="#{matriculaBean.matricula.data_ped}"
+					locale="pt_BR" />
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{matriculaBean.salvar}"
+					update=":mensagem :formCadastro:painelCadastro :formListagem:tabela" />
+				<p:commandButton value="Fechar" update=":formListagem:tabela"
+					oncomplete="PF('dlgMatriculas').hide ();" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+		
+		
+</h:body>
+</html>

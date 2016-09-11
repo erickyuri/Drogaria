@@ -1,0 +1,27 @@
+<ui:composition
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:toolbar>
+		<p:toolbarGroup style="margin-top: 20px;">
+			<p:button value="Novo" outcome="/pagesalga/CadastroPedido" />
+			<p:commandButton value="Salvar" id="botaoSalvar" />
+		</p:toolbarGroup>
+
+		<p:toolbarGroup align="right">
+
+			<p:commandButton value="Emitir" />
+			<p:commandButton value="Cancelar" />
+			<p:commandButton value="Enviar por e-mail" />
+			
+			<p:separator/>
+			<p:button value="Pesquisa" outcome="/pagesalga/PesquisaPedidos" />
+		</p:toolbarGroup>
+	</p:toolbar>
+
+
+</ui:composition>

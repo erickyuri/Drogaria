@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-09-03T19:19:19 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="controle" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f355dd88-afeb-4de5-8fde-ad86d81a76c4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZHJvZ2FyaWEuY2Fzb3MgLDE1LDE1LDJiNjkyZTk5LTIzZTctNGVlMC1iOWM1LTllNTEzYTRkY2VmMzs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="casoscontrole"/>
+	<parameter name=" _ScheduledTime" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name=" _ScheduledTime2" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT drogaria.casos.codigo,
+	drogaria.casos.data_ass,
+	drogaria.casos.folha_i,
+	drogaria.casos.folha_f,
+	drogaria.casos.livro,
+	drogaria.casos.natureza,
+	drogaria.casos.parte,
+	drogaria.casos.valor,
+	drogaria.casos.status
+FROM drogaria.casos
+WHERE 
+	 $X{NOTEQUAL,drogaria.casos.status,FILTER} 
+	 AND drogaria.casos.data_ass BETWEEN _ScheduledTime and _ScheduledTime2]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="data_ass" class="java.sql.Date"/>
+	<field name="folha_i" class="java.lang.Integer"/>
+	<field name="folha_f" class="java.lang.Integer"/>
+	<field name="livro" class="java.lang.Integer"/>
+	<field name="natureza" class="java.lang.String"/>
+	<field name="parte" class="java.lang.String"/>
+	<field name="valor" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<background>
+		<band height="3" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<image>
+				<reportElement x="-10" y="2" width="554" height="48" uuid="9270b840-7471-4c7d-8b20-0f612b21a8f5"/>
+				<imageExpression><![CDATA["file:/C:/Users/gu/git/faces-motors/WebContent/resources/images/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="183" height="28" uuid="7bc44df2-fb85-4660-920c-eb549c1331eb"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Controle Mensal]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="40" height="18" uuid="48274fca-0c7a-44de-9457-f7fb3dcc72b3"/>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="100" height="19" uuid="145c978f-41be-4531-89a4-cf12ceb46fee"/>
+				<text><![CDATA[parte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="3" width="120" height="16" uuid="88a733d1-91a6-463e-a3f1-11ce607b9141"/>
+				<text><![CDATA[natureza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="3" width="100" height="13" uuid="6971a7fa-814d-4339-8f66-974b7a4d09b9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[livro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="7" width="100" height="15" uuid="8d6925ed-0dcc-4649-b58e-0ff8abdadef4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[folha_i]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="6" width="90" height="17" uuid="01930728-fc1e-41dc-9626-862b67996858"/>
+				<text><![CDATA[valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="50" height="18" uuid="26287e59-305b-4b3a-b456-c206a8b7e965"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="2" width="80" height="18" uuid="9dae4d70-37e1-45d0-9ae9-72d22ec387a2"/>
+				<textFieldExpression><![CDATA[$F{parte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="2" width="120" height="18" uuid="0edc1253-d7f1-4c9b-9c26-a3ec661df2a5"/>
+				<textFieldExpression><![CDATA[$F{natureza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="2" width="100" height="18" uuid="be08ffb5-c49b-44fa-b9cc-fb874e23cd4e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="2" width="100" height="18" uuid="4120843e-b2bc-441d-98f4-9a04ff8a160f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{folha_i}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="2" width="86" height="18" uuid="d0bd6559-0969-4c5a-8a2f-7679ab06787f"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="43" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="56" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch"/>
+	</summary>
+</jasperReport>

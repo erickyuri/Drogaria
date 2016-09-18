@@ -96,7 +96,7 @@ public class Casos extends GenericDomain {
 
 	public void setTotal(BigDecimal total) {
 		
-		total = valor_cob.subtract(valor);
+		this.total = getValor_cob().subtract(getValor());
 	}
 
 	@Lob

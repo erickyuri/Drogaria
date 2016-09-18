@@ -130,6 +130,7 @@ public class CasosBean implements Serializable {
 	public void salvar() {
 		try {
 			CasosDAO casosDAO = new CasosDAO();
+			
 			casosDAO.merge(caso);
 
 			caso = new Casos();

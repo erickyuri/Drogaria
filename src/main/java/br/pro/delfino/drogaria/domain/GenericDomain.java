@@ -1,6 +1,7 @@
 package br.pro.delfino.drogaria.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -50,5 +51,10 @@ public class GenericDomain implements Serializable {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public BigDecimal lucro() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html > 
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
@@ -11,23 +11,47 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Controle de Casos</ui:insert></title>
-	
+
 
 	<h:outputStylesheet library="css" name="sistema.css" />
 </h:head>
 
 <h:body>
 	<header>
-	<div>
+		<div style="float:left">
 
-		<h:link>
-			<h:graphicImage library="images" name="prog.png" />
+			<h:link outcome="/Home">
+				<h:graphicImage library="images" name="prog.png" />
 
-		</h:link>
+			</h:link>
 
-	</div>
+		</div>
 
+		<div style="float: right; margin-right: 110px;">
+		
+			<span style="float: left; height: 30px; line-height:30px; margin-right: 60px">
+			OlaUsuario
+			</span>
+			<h:form style="display: inline-black">
+				<p:menubar>
+					<p:submenu label="Cadastros">
 
+					<p:menuitem value="Clientes" />
+					<p:menuitem value="Usuários" />
+					<p:separator/>
+					<p:menuitem value="Categorias" />
+					<p:menuitem value="Produstros" outcome="/pagesalga/PesquisaProdutos" />
+					</p:submenu>
+					
+					<p:submenu label="Pedidos">
+						<p:menuitem value="Novo Pedido" outcome="/pagesalga/CadastroPedido"/>
+						<p:menuitem value="Pesquisa de pedidos" outcome="/pagesalga/PesquisaPedidos"/>
+					</p:submenu>
+					<p:menuitem value="Sair" />
+				</p:menubar>
+
+			</h:form>
+		</div>
 
 	</header>
 
@@ -35,16 +59,13 @@
 
 
 </h:body>
-
+<div style="clear: both;"/>
 <div id="conteudo">
-	<ui:insert name="corpo"/>
+	<ui:insert name="corpo" />
 </div>
 
-<p:separator style="margin-top: 20px"/>
+<p:separator style="margin-top: 20px" />
 
-<footer>
-		Em cada erro um aprendizado
-		
-</footer>
+<footer> Em cada erro um aprendizado </footer>
 
 </html>

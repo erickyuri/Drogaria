@@ -22,6 +22,10 @@ import javax.persistence.Transient;
 @Entity
 public class Casos extends GenericDomain {
 
+	@Column(precision = 6, scale = 2)
+	private BigDecimal soma; 
+	
+
 	
 	
 	@Column(nullable = false)
@@ -87,17 +91,6 @@ public class Casos extends GenericDomain {
 	 
 	 
 	 
-	 @Column(precision = 6, scale = 2)
-	 private BigDecimal total;
-	 
-	 public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		
-		this.total = getValor_cob().subtract(getValor());
-	}
 
 	@Lob
 	 @Column
@@ -253,9 +246,13 @@ public class Casos extends GenericDomain {
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
-	
-	
-	
-	
 
-}
+	public BigDecimal getSoma() {
+		return soma;
+	}
+
+	public void setSoma(BigDecimal soma) {
+		this.soma = soma;
+	}
+	
+	}

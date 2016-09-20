@@ -126,3 +126,11 @@ footer {
 	padding: 0px !important;
 }
 
+
+.menu-sistema{
+	border: 0px !important;
+	padding: opx !important;
+	background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui.menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menu

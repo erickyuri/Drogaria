@@ -34,7 +34,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 @ManagedBean
 @ViewScoped
 public class CasosBean implements Serializable {
-    private BigDecimal total;
+    
 	private Casos caso;
 	private List<Casos> casos;
 	private List<Natureza> naturezas;
@@ -76,14 +76,13 @@ public class CasosBean implements Serializable {
 		this.casos = casos;
 	}
 	
-	public BigDecimal getTolta(){
-		return total;
-	}
 	
-	public void setTotal(BigDecimal total){
-		this.total = total;
-	}
-
+	
+	
+	
+	
+	
+	
 	@PostConstruct
 	public void listar() {
 		
@@ -132,8 +131,8 @@ public class CasosBean implements Serializable {
 			CasosDAO casosDAO = new CasosDAO();
 			
 			casosDAO.merge(caso);
-
 			caso = new Casos();
+			
 			casos = casosDAO.listar();
 
 			Messages.addGlobalInfo("Estado salvo com sucesso");

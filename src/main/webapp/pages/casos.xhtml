@@ -163,7 +163,7 @@
 			</p:panelGrid>
 
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{casosBean.salvar}"
+				<p:commandButton value="Salvar" actionListener="#{casosBean.salvar2}"
 					update=":mensagem :formCadastro:painelCadastro :formListagem:tabela" />
 				<p:commandButton value="Fechar" update=":formListagem:tabela"
 					oncomplete="PF('dlgMatriculas').hide ();" />
@@ -247,6 +247,8 @@
 					maxlength="11" size="11" onkeypress="mascara(this, valor)" >
 					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:inputText>
+					
+					
 
 			</p:panelGrid>
 

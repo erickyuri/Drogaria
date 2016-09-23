@@ -1,7 +1,7 @@
 package br.pro.delfino.drogaria.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
@@ -90,11 +90,7 @@ public class CasosBean implements Serializable {
 			CasosDAO casosDAO = new CasosDAO();
 			casos = casosDAO.listar();
 
-			
-			
-
-			
-			
+						
 		} catch (RuntimeException erro) {
 
 			Messages.addGlobalInfo("Não foi possivel listar");
@@ -129,6 +125,7 @@ public class CasosBean implements Serializable {
 	public void salvar() {
 		try {
 			CasosDAO casosDAO = new CasosDAO();
+			caso.setSoma(caso.getValor_cob().subtract(caso.getValor()));
 			
 			casosDAO.merge(caso);
 			caso = new Casos();
@@ -141,12 +138,29 @@ public class CasosBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
+	public void salvar2() {
+		try {
+			CasosDAO casosDAO = new CasosDAO();
+			casosDAO.merge(caso);
+			caso = new Casos();
+			
+			casos = casosDAO.listar();
+
+			Messages.addGlobalInfo("Estado salvo com sucesso");
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o estado");
+			erro.printStackTrace();
+		}
+	}
+
 
 	public void novo() {
 
 		try {
 
 			caso = new Casos();
+			
 			NaturezasDAO naturezasDAO = new NaturezasDAO();
 			naturezas = naturezasDAO.listar();
 		

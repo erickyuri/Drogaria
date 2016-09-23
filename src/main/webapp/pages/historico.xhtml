@@ -71,8 +71,12 @@
 
 						<p:outputLabel value="folha final:" />
 						<h:outputText value="#{historicoBean.caso.folha_f}" />
+					
 					<p:outputLabel value="Emolumentos R$:" />
 					<h:outputText value="#{historicoBean.caso.valor}" />
+					
+					<p:outputLabel value="Ganhos R$: "/>
+					<h:outputText value="#{historicoBean.caso.soma}"/>
 					
 						<p:outputLabel value="Observações:" />
 						<h:inputTextarea value="#{historicoBean.caso.observacao}" />
